@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+    <div class="section-container" style="max-width: 600px; margin: 0 auto; margin-top: 100px; text-align: center;">
+        <h2 style="color: #28a745; font-size: 36px; margin-bottom: 20px;">Booking Successful!</h2>
+        <p style="font-size: 18px; margin-bottom: 30px;">Your service request has been received. Our team will review it shortly.</p>
+        
+        <a href="{% url 'services:my_bookings' %}" class="submit-btn" style="text-decoration: none; padding: 10px 20px; background-color: #007bff; color: white; border-radius: 5px;">
+            Go to My Bookings
+        </a>
+    </div>
+</section>
+{% endblock %}

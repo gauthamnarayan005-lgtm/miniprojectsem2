@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPro - Workshop Management System</title>
+    <link rel="stylesheet" href="{% static 'css/templatemo-sleeky-pro.css' %}">
+</head>
+<body>
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="/" class="logo-container">
+                <span class="logo-text">AutoPro Workshop</span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/#services" class="nav-link">Services</a></li>
+                <li><a href="/#about" class="nav-link">About</a></li>
+                <li><a href="#" class="nav-link">Products</a></li>
+                
+                {% if user.is_authenticated %}
+                    {% if user.is_customer %}
+                        <li><a href="{% url 'services:book_service' %}" class="nav-link">Book Service</a></li>
+                        <li><a href="{% url 'services:my_bookings' %}" class="nav-link">My Bookings</a></li>
+                    {% elif user.is_employee %}
+                        <li><a href="{% url 'accounts:employee_dashboard' %}" class="nav-link">Employee Dashboard</a></li>
+                    {% endif %}
+                    
+                    <li><a href="{% url 'accounts:logout' %}" class="nav-link" style="color: #FF6B6B;">Logout ({{ user.username }})</a></li>
+
+                {% else %}
+                    <li><a href="{% url 'accounts:login' %}" class="nav-link">Login</a></li>
+                    <li><a href="{% url 'accounts:register' %}" class="nav-link active">Register</a></li>
+                {% endif %}
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <span class="footer-logo-text">AutoPro</span>
+                    <p class="footer-description">Premium vehicle diagnostics, maintenance, and custom modifications. Your trusted workshop partner.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2026 AutoPro Workshop Management. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/templatemo-sleeky-scripts.js' %}"></script>
+</body>
+</html>
